@@ -1,6 +1,7 @@
 # Define new zone for the dns
 define dns::zone (
     $zonetype       = 'master',
+    $dynamic        = undef,
     $soa            = $::fqdn,
     $reverse        = false,
     $ttl            = '10800',
@@ -22,6 +23,15 @@ define dns::zone (
   validate_array($masters, $allow_transfer)
 
   $zonefilename = "${zonefilepath}/${filename}"
+
+  if ($dynamic == undef) {
+    $dynamic_final = $zonetype ? {
+      'master' => true,
+      default  => false
+    }
+  } else {
+    $dynamic_final = $dynamic
+  }
 
   concat::fragment { "dns_zones+10_${zone}.dns":
     target  => $::dns::publicviewpath,

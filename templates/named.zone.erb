@@ -1,7 +1,7 @@
 zone "<%= @zone %>" {
     type <%= @zonetype %>;
     file "<%= @zonefilename %>";
-<% if @zonetype == 'master' -%>
+<% if @dynamic_final -%>
     update-policy {
             grant rndc-key zonesub ANY;
     };
