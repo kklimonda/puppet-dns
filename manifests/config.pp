@@ -1,5 +1,6 @@
 # Configure dns
 class dns::config(
+  $options_hash = {},
   $owner = $::dns::params::user,
   $group = $::dns::params::group,
   $perms = "0640",
