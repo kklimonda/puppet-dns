@@ -2,6 +2,7 @@
 class dns::config(
   $owner = $::dns::params::user,
   $group = $::dns::params::group,
+  $perms = "0640",
 ){
   group { $dns::params::group: }
 
@@ -31,7 +32,7 @@ class dns::config(
       ensure  => directory,
       owner   => $owner,
       group   => $group,
-      mode    => '0640';
+      mode    => $perms;
   }
 
   exec { 'create-rndc.key':
