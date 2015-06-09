@@ -1,5 +1,8 @@
 # Configure dns
-class dns::config {
+class dns::config(
+  $owner = $::dns::params::user,
+  $group = $::dns::params::group,
+){
   group { $dns::params::group: }
 
   concat { $::dns::publicviewpath:
@@ -26,8 +29,8 @@ class dns::config {
       content => template('dns/options.conf.erb');
     $dns::zonefilepath:
       ensure  => directory,
-      owner   => $dns::params::user,
-      group   => $dns::params::group,
+      owner   => $owner,
+      group   => $group,
       mode    => '0640';
   }
 
