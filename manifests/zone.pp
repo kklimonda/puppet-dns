@@ -39,10 +39,13 @@ define dns::zone (
     order   => "10-${zone}",
   }
 
+  $real_user = hiera('dns::config::user', $dns::user)
+  $real_group = hiera('dns::config::group', $dns::group)
+
   file { $zonefilename:
     ensure  => file,
-    owner   => $dns::user,
-    group   => $dns::group,
+    owner   => $real_user,
+    group   => $real_group,
     mode    => '0644',
     content => template('dns/zone.header.erb'),
     replace => false,
