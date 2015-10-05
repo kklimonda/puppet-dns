@@ -10,6 +10,6 @@ forwarders { <%= scope.lookupvar('::dns::forwarders').join("; ") %>; };
 	<%= val %>;
 };
 <% else -%>
-<%= key %> { <%= value %>; };
+<%= key %> <%= value %>;
 <% end -%>
 listen-on-v6 { <%= scope.lookupvar('::dns::listen_on_v6') %>; };
