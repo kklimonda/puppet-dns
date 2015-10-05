@@ -9,6 +9,7 @@ forwarders { <%= scope.lookupvar('::dns::forwarders').join("; ") %>; };
 <% value.each do |val| -%>
 	<%= val %>;
 };
+<% end -%>
 <% else -%>
 <%= key %> <%= value %>;
 <% end -%>
